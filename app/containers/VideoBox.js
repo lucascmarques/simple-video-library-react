@@ -17,8 +17,8 @@ class VideoBox extends Component {
       // backgroundImage: 'url(' + video.cover.split('\\').join('/') + ')'
     };
     return (
-      <div className="video-box" onClick={() => this.props.selectVideo(video)} onDoubleClick={() => this.props.openVideo(video)}>
-        <div className="video-info">
+      <div className="video-box">
+        <div className="video-info" onClick={() => this.props.selectVideo(video)} onDoubleClick={() => this.props.openVideo(video)}>
           <div className="video-cover" style={videoCoverStyle}>
             <div className="video-name">{video.name}</div>
           </div>
@@ -43,7 +43,7 @@ class VideoBox extends Component {
 }
 
 function mapStateToProps({ videos }, thisProps) {
-  return { video: videos[thisProps.id] };
+  return { video: videos.data[thisProps.id] };
 }
 
 export default connect(mapStateToProps, { openVideo, rateVideo, selectVideo })(VideoBox);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import VideoInfoSidebar from "./VideoInfoSidebar";
 
 export default class Sidebar extends Component {
 
@@ -24,6 +25,7 @@ export default class Sidebar extends Component {
             </li>
           </ul>
         </section>
+        <VideoInfoSidebar />
       </aside>
     );
   }

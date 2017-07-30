@@ -4,9 +4,13 @@ import { FETCH_VIDEOS, UPDATE_VIDEO, SELECT_VIDEO } from "../actions/videos";
 export default function(state = {}, action) {
   switch (action.type) {
     case FETCH_VIDEOS:
-      return _.mapKeys(action.payload, "_id");
+      return { data: _.mapKeys(action.payload, "_id") };
     case UPDATE_VIDEO:
-      return { ...state, [action.payload._id]: action.payload };
+      let newState = { ...state };
+      newState.data[action.payload._id] = action.payload;
+      return newState;
+    case SELECT_VIDEO:
+      return { ...state, selectedVideo: action.payload };
     default:
       return state;
   }

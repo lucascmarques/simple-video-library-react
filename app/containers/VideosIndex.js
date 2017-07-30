@@ -33,7 +33,7 @@ class VideosIndex extends Component {
 
 function mapStateToProps(state) {
   return {
-    videos: state.videos
+    videos: state.videos.data
   };
 }
 

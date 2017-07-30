@@ -5,8 +5,13 @@ import { selectVideo } from '../actions/videos';
 class VideoInfoSidebar extends Component {
 
   render() {
+    const video = this.props.selectedVideo;
+    if (!video) {
+      return null;
+    }
     return (
       <div className="video-info-sidebar">
+        {video.name}
       </div>
     );
   }
@@ -14,10 +19,9 @@ class VideoInfoSidebar extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.selectedVideo);
   return {
-    selectedVideo: state.selectedVideo
+    selectedVideo: state.videos.selectedVideo
   };
 }
 
-export default connect(mapStateToProps, { openVideo, rateVideo })(VideoBox);
+export default connect(mapStateToProps, { selectVideo })(VideoInfoSidebar);
