@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { selectVideo, updateVideo } from '../actions/videos';
+import { WithContext as ReactTags } from 'react-tag-input';
 
 class VideoInfoSidebar extends Component {
 
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleAddition = this.handleAddition.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleInputChange(event) {
@@ -19,10 +22,29 @@ class VideoInfoSidebar extends Component {
     updateVideo(this.props.selectedVideo);
   }
 
+  handleAddition(actor) {
+    let actors = this.props.selectedVideo.actors;
+    actors.push({
+      name: actor
+    });
+    updateVideo(this.props.selectedVideo);
+  }
+
+  handleDelete(i) {
+    let actors = this.props.selectedVideo.actors;
+    actors.splice(i, 1);
+    updateVideo(this.props.selectedVideo);
+  }
+
   render() {
     let video = this.props.selectedVideo;
     if (!video) {
       return null;
+    }
+    let actors = video.actors;
+    if (actors === undefined) {
+      actors = [];
+      video.actors = actors;
     }
     return (
       <div className="video-info-sidebar">
@@ -31,6 +53,19 @@ class VideoInfoSidebar extends Component {
             <label htmlFor="name" className="col-sm-3 control-label">Name</label>
             <div className="col-sm-9">
               <input id="name" className="form-control" type="text" name="name" value={video.name} onChange={this.handleInputChange} />
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="actors" className="col-sm-3 control-label">Actors</label>
+            <div className="col-sm-9">
+              <ReactTags tags={video.actors}
+                         labelField={'name'}
+                         handleDelete={this.handleDelete}
+                         handleAddition={this.handleAddition}
+                         placeholder="Add new actor"
+                         classNames={{
+                           tagInputField: 'form-control'
+                         }}/>
             </div>
           </div>
           <div className="form-group">
