@@ -11,11 +11,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="wrapper">
-        <aside className="main-sidebar">
-          <section className="sidebar">
-            <Sidebar/>
-          </section>
-        </aside>
+        <Sidebar/>
         <div className="content-wrapper">
           {this.props.children}
         </div>
