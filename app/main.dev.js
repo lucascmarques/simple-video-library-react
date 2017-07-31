@@ -13,6 +13,7 @@
 import { app, BrowserWindow } from 'electron';
 import MenuBuilder from './menu';
 
+const electron = require('electron');
 let mainWindow = null;
 let db = require('./electron/database');
 
@@ -60,10 +61,13 @@ app.on('ready', async () => {
     await installExtensions();
   }
 
+  var screenElectron = electron.screen;
+  var mainScreen = screenElectron.getPrimaryDisplay();
+  var dimensions = mainScreen.size;
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728
+    width: dimensions.width,
+    height: dimensions.height
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
