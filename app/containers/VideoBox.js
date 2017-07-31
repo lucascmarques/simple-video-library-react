@@ -13,8 +13,7 @@ class VideoBox extends Component {
   render() {
     let video = this.props.video;
     let videoCoverStyle = {
-      background: 'red',
-      // backgroundImage: 'url(' + video.cover.split('\\').join('/') + ')'
+      backgroundImage: 'url(' + video.cover.split('\\').join('/') + ')'
     };
     return (
       <div className="video-box">
