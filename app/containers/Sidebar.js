@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import VideoInfoSidebar from "./VideoInfoSidebar";
+import { Link } from "react-router-dom";
 
 export default class Sidebar extends Component {
 
@@ -9,19 +10,19 @@ export default class Sidebar extends Component {
         <section className="sidebar">
           <ul className="sidebar-menu">
             <li>
-              <a>
+              <Link to="/">
                 <i className="fa fa-play-circle"></i>
                 <span>Videos</span>
                 <span className="pull-right-container">
                   <span className="label label-primary pull-right">5</span>
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a>
+              <Link to="/preferences">
                 <i className="fa fa-cog"></i>
                 <span>Preferences</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </section>

@@ -16,6 +16,7 @@ import MenuBuilder from './menu';
 const electron = require('electron');
 let mainWindow = null;
 let db = require('./electron/database');
+let db2 = require('./electron/database_2');
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');

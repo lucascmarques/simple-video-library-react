@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { selectVideo, updateVideo } from '../actions/videos';
+import { selectVideo, updateVideo, insertActor } from '../actions/videos';
 import { WithContext as ReactTags } from 'react-tag-input';
 
 class VideoInfoSidebar extends Component {
@@ -8,8 +8,8 @@ class VideoInfoSidebar extends Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleAddition = this.handleAddition.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    this.addActor = this.addActor.bind(this);
+    this.deleteActor = this.deleteActor.bind(this);
   }
 
   handleInputChange(event) {
@@ -22,15 +22,14 @@ class VideoInfoSidebar extends Component {
     updateVideo(this.props.selectedVideo);
   }
 
-  handleAddition(actor) {
+  addActor(actorName) {
     let actors = this.props.selectedVideo.actors;
-    actors.push({
-      name: actor
-    });
+    let actor = insertActor({name: actorName});
+    actors.push(actor);
     updateVideo(this.props.selectedVideo);
   }
 
-  handleDelete(i) {
+  deleteActor(i) {
     let actors = this.props.selectedVideo.actors;
     actors.splice(i, 1);
     updateVideo(this.props.selectedVideo);
@@ -60,8 +59,8 @@ class VideoInfoSidebar extends Component {
             <div className="col-sm-9">
               <ReactTags tags={video.actors}
                          labelField={'name'}
-                         handleDelete={this.handleDelete}
-                         handleAddition={this.handleAddition}
+                         handleDelete={this.deleteActor}
+                         handleAddition={this.addActor}
                          placeholder="Add new actor"
                          classNames={{
                            tagInputField: 'form-control'
